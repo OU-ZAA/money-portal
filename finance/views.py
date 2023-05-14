@@ -29,7 +29,8 @@ def transactions(request):
         transaction = Transaction(
             amount=amount,
             transaction_type=transaction,
-            memo=memo
+            memo=memo,
+            user=request.user
         )
         transaction.save()
 

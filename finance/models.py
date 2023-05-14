@@ -8,7 +8,7 @@ class User(AbstractUser):
 
 class Transaction(models.Model):
     amount = models.FloatField()
-    Transaction_type = models.CharField(max_length=25)
+    transaction_type = models.CharField(max_length=25)
     memo = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
