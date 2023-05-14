@@ -18,7 +18,8 @@ class Transaction(models.Model):
             "id": self.id,
             "amount": self.amount,
             "transaction_type": self.transaction_type,
-            "created_at": self.created_at
+            "memo": self.memo,
+            "created_at": self.created_at.strftime("%b %d %Y, %I:%M %p"),
         }
 
     def __str__(self):
