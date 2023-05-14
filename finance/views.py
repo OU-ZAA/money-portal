@@ -1,6 +1,6 @@
 import json
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -34,7 +34,7 @@ def transactions(request):
         )
         transaction.save()
 
-        return HttpResponse({"message": "New transaction created succeful"}, status=201)
+        return JsonResponse({"message": "New transaction created succeful"}, status=201)
 
     return HttpResponse(status=200)
 
