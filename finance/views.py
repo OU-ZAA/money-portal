@@ -35,8 +35,10 @@ def transactions(request):
         transaction.save()
 
         return JsonResponse({"message": "New transaction created succeful"}, status=201)
+    
+    transactions = Transaction.objects.filter(user=request.user).order_by("-created_at")
 
-    return HttpResponse(status=200)
+    return JsonResponse([transaction.serialize() for transaction in transactions], safe=False)
 
 
 def login_view(request):

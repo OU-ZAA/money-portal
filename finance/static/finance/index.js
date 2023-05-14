@@ -22,3 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#memo").value = ""
     })
 })
+
+function load_dashboard() {
+    
+}

@@ -13,6 +13,14 @@ class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "amount": self.amount,
+            "transaction_type": self.transaction_type,
+            "created_at": self.created_at
+        }
+
     def __str__(self):
         return self.memo
 
