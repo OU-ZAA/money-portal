@@ -1,0 +1,14 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.login-form {
+    width: 400px;
+}
+
+.scrollabe {
+    height: 320px;
+    overflow-y: scroll;
+}
