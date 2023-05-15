@@ -8,7 +8,7 @@
     width: 400px;
 }
 
-.scrollabe {
+.scrollable {
     height: 320px;
     overflow-y: scroll;
 }

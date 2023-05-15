@@ -5,6 +5,11 @@ from django.db import models
 class User(AbstractUser):
     balance = models.FloatField(default=10000.00)
 
+    def serialize(self):
+        return {
+            "balance": self.balance
+        }
+
 
 class Transaction(models.Model):
     amount = models.FloatField()

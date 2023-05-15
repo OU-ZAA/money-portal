@@ -34,11 +34,25 @@ def transactions(request):
         )
         transaction.save()
 
+        # Update the balance
+        if transaction == "deposit":
+            request.user.balance += amount
+            request.user.save()
+        elif transaction == "point of sale":
+            request.user.balalnce -= amount
+            request.user.save()
+
         return JsonResponse({"message": "New transaction created succeful"}, status=201)
     
     transactions = Transaction.objects.filter(user=request.user).order_by("-created_at")
 
     return JsonResponse([transaction.serialize() for transaction in transactions], safe=False)
+
+
+def data(request):
+    data = []
+    
+    return JsonResponse(request.user.serialize(), safe=False)
 
 
 def login_view(request):

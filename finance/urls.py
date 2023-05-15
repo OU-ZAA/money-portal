@@ -8,5 +8,6 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
 
     # API routes
-    path("transactions", views.transactions, name="transactions")
+    path("transactions", views.transactions, name="transactions"),
+    path("users", views.users, name="users")
 ]

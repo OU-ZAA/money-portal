@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    ShowBalance()
     document.querySelector("form").addEventListener("submit", async (e) => {
         e.preventDefault()
 
@@ -20,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#amount").value = ""
         document.querySelector("#transaction-type").value = ""
         document.querySelector("#memo").value = ""
+
+        load_dashboard()
     })
 
     load_dashboard()
@@ -66,5 +69,13 @@ async function load_dashboard() {
     } catch (e) {
         console.error(e)
     }
+}
 
+async function Showdata() {
+    // The the current login user balance
+    res = await fetch("/users")
+    data = await res.json()
+
+    // Render the balance in the ui
+    document.querySelector("#balance").textContent = `$${data.balance}`
 }
