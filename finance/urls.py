@@ -9,5 +9,6 @@ urlpatterns = [
 
     # API routes
     path("transactions", views.transactions, name="transactions"),
-    path("users", views.users, name="users")
+    path("users", views.users, name="users"),
+    path("transactions/thismonth", views.thismonth_transactions, name="thismonth-transactions")
 ]

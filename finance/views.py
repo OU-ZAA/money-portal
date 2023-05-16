@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from .models import Transaction, User
 
@@ -36,11 +37,14 @@ def transactions(request):
 
         # Update the balance
         if transaction == "deposit":
-            request.user.balance += amount
-            request.user.save()
+            user = User.objects.get(user=request.user)
+            user.balance = user.balance + amount
+            user.save()
+
         elif transaction == "point of sale":
-            request.user.balalnce -= amount
-            request.user.save()
+            user = User.objects.get(user=request.user)
+            user.balance = user.balance - amount
+            user.save()
 
         return JsonResponse({"message": "New transaction created succeful"}, status=201)
     
@@ -49,10 +53,16 @@ def transactions(request):
     return JsonResponse([transaction.serialize() for transaction in transactions], safe=False)
 
 
-def data(request):
-    data = []
-    
+def users(request):
     return JsonResponse(request.user.serialize(), safe=False)
+
+
+def thismonth_transactions(request):
+    # Get this month transactions
+    thismonth = str(timezone.now().month)
+    transactions = Transaction.objects.filter(user=request.user, created_at__month=thismonth)
+
+    return JsonResponse([transaction.serialize() for transaction in transactions], safe=False)
 
 
 def login_view(request):

@@ -25,6 +25,7 @@ class Transaction(models.Model):
             "transaction_type": self.transaction_type,
             "memo": self.memo,
             "created_at": self.created_at.strftime("%b %d %Y, %I:%M %p"),
+            "user": self.user.username
         }
 
     def __str__(self):

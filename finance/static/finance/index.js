@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    ShowBalance()
+    displayBalance()
+    displayMonthlyDepositAndSpending()
     document.querySelector("form").addEventListener("submit", async (e) => {
         e.preventDefault()
 
@@ -23,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#memo").value = ""
 
         load_dashboard()
+        displayBalance()
+        displayMonthlyDepositAndSpending()
     })
 
     load_dashboard()
@@ -65,17 +68,41 @@ async function load_dashboard() {
                 amountDiv.classList.add("text-danger")
             }
         }) 
+
+        // Update the transactions count
+        document.querySelector("#transactions").textContent = data.length
         
     } catch (e) {
         console.error(e)
     }
 }
 
-async function Showdata() {
+async function displayBalance() {
     // The the current login user balance
     res = await fetch("/users")
     data = await res.json()
 
     // Render the balance in the ui
     document.querySelector("#balance").textContent = `$${data.balance}`
+}
+
+async function displayMonthlyDepositAndSpending() {
+    // Fetch the monthly spending
+    res = await fetch("/transactions/thismonth")
+    data = await res.json()
+
+    // Calculate the monthly deposit and spending
+    let monthlyDeposit = 0
+    let monthlySpending = 0
+    data.map(transaction => {
+        if (transaction.transaction_type === "deposit") {
+            monthlyDeposit += transaction.amount
+        } else if (transaction.transaction_type === "point of sale") {
+            monthlySpending += transaction.amount
+        }
+    })
+
+    // Rendet the result
+    document.querySelector("#monthly-spending").textContent = `$${monthlySpending}`
+    document.querySelector("#monthly-deposit").textContent = `$${monthlyDeposit}`
 }
