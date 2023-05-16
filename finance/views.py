@@ -23,27 +23,27 @@ def transactions(request):
         # Get the data
         data = json.loads(request.body)
         amount = data.get("amount")
-        transaction = data.get("transaction_type")
+        transactionType = data.get("transaction_type")
         memo = data.get("memo")
 
         # Create a new transaction and save it to db
         transaction = Transaction(
             amount=amount,
-            transaction_type=transaction,
+            transaction_type=transactionType,
             memo=memo,
             user=request.user
         )
         transaction.save()
 
         # Update the balance
-        if transaction == "deposit":
-            user = User.objects.get(user=request.user)
-            user.balance = user.balance + amount
+        if transactionType == "deposit":
+            user = User.objects.get(username=request.user.username)
+            user.balance += float(amount)
             user.save()
 
-        elif transaction == "point of sale":
-            user = User.objects.get(user=request.user)
-            user.balance = user.balance - amount
+        elif transactionType == "point of sale":
+            user = User.objects.get(username=request.user.username)
+            user.balance -= float(amount)
             user.save()
 
         return JsonResponse({"message": "New transaction created succeful"}, status=201)
