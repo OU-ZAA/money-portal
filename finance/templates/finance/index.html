@@ -3,6 +3,7 @@
 
 {% block body %}
     <div>
+        {% if user.is_authenticated %}
         <div class="m-4">
             <div class="row gap-4 text-muted">
                 <div class="col p-2 bg-light rounded-3">
@@ -75,6 +76,7 @@
                 </table>
             </div>
         </div>
+        {% endif %}
     </div>
 {% endblock %}
 
