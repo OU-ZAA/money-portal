@@ -27,38 +27,38 @@
 
         <div class="accordion m-4" id="accordionExample">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
+                <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Add Transaction
+                    Add Transaction
                 </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <form class="row p-2">
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <form class="row p-2 gap-2">
                     {% csrf_token %}
-                    <div class="col-2">
-                      <input type="number" step="0.01" class="form-control" placeholder="Amount" aria-label="amount" id="amount">
+                    <div class="col-md-2 col-12">
+                        <input type="number" step="0.01" class="form-control" placeholder="Amount" aria-label="amount" id="amount">
                     </div>
-                    <div class="col-2">
+                    <div class="col-md-2 col-12">
                         <select class="form-select" id="transaction-type">
                             <option selected disabled value="">Transaction type</option>
                             <option value="deposit">Deposit</option>
                             <option value="point of sale">Point of sale</option>
                         </select>
                     </div>
-                    <div class="col">
+                    <div class="col-md-7 col-12">
                         <input type="text" class="form-control" placeholder="Memo" aria-label="memo" id="memo">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
-              </div>
+                </div>
             </div>
         </div>
 
         <div class="m-4 bg-light p-2">
             <div class="scrollable">
-                <table class="table caption-top">
+                <table class="table table-sm caption-top">
                     <caption>Transactions</caption>
                     <thead class="table-dark">
                         <tr>
