@@ -102,7 +102,7 @@ async function displayMonthlyDepositAndSpending() {
         }
     })
 
-    // Rendet the result
+    // Render the result
     document.querySelector("#monthly-spending").textContent = `$${monthlySpending}`
     document.querySelector("#monthly-deposit").textContent = `$${monthlyDeposit}`
 }

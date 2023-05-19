@@ -10,14 +10,16 @@ from django.utils import timezone
 
 from .models import Transaction, User
 
-# Create your views here.
 def index(request):
+    # Check if the user is authenticated
     if request.user.is_authenticated:
         return render(request, "finance/index.html")
 
+    # Check if the user is store in the session
     if "user_id" in request.session:
-        return render(request, "finanace/index.html")
+        return render(request, "finance/index.html")
 
+    # Request the user to login
     return HttpResponseRedirect(reverse("login"))
 
 
@@ -52,7 +54,7 @@ def transactions(request):
             user.balance -= float(amount)
             user.save()
 
-        return JsonResponse({"message": "New transaction created succeful"}, status=201)
+        return JsonResponse({"message": "New transaction created successful"}, status=201)
     
     transactions = Transaction.objects.filter(user=request.user).order_by("-created_at")
 
